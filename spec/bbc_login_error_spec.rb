@@ -98,34 +98,52 @@ describe "Full Registration Process" do
       @bbc_site.bbc_dob_page.select_submit_link
     end
 
-    it "when password field is empty" do
-      @bbc_site.bbc_details_page.set_password_value " "
+    # it "when password field is empty" do
+    #   @bbc_site.bbc_details_page.set_password_value " "
+    #   @bbc_site.bbc_details_page.submit_form
+    #   expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password is too short. It needs to be eight characters or more."
+    # end
+    #
+    # it "when password is too short" do
+    #   @bbc_site.bbc_details_page.set_password_value "pass"
+    #   @bbc_site.bbc_details_page.submit_form
+    #   expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password is too short. It needs to be eight characters or more."
+    # end
+    #
+    # it "when password doesn't contain a letter" do
+    #   @bbc_site.bbc_details_page.set_password_value "12345678"
+    #   @bbc_site.bbc_details_page.submit_form
+    #   expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password isn't valid. Please include a letter."
+    # end
+    #
+    # it "when password only contains letters" do
+    #   @bbc_site.bbc_details_page.set_password_value "password"
+    #   @bbc_site.bbc_details_page.submit_form
+    #   expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password isn't valid. Please include something that isn't a letter."
+    # end
+    #
+    # it "when password is easy to guess" do
+    #   @bbc_site.bbc_details_page.set_password_value "password1"
+    #   @bbc_site.bbc_details_page.submit_form
+    #   expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password isn't valid. Make sure it's hard to guess."
+    # end
+
+    it "when postcode is too short" do
+      @bbc_site.bbc_details_page.set_postcode_value "TW"
       @bbc_site.bbc_details_page.submit_form
-      expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password is too short. It needs to be eight characters or more."
+      expect(@bbc_site.bbc_details_page.get_postcode_error_msg).to eq "Sorry, that postcode's too short. Please check it's a proper postcode."
     end
 
-    it "when password is too short" do
-      @bbc_site.bbc_details_page.set_password_value "pass"
+    it "when postcode doesn't refer to valid postcode" do
+      @bbc_site.bbc_details_page.set_postcode_value "TWTW TTT"
       @bbc_site.bbc_details_page.submit_form
-      expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password is too short. It needs to be eight characters or more."
+      expect(@bbc_site.bbc_details_page.get_postcode_error_msg).to eq "Sorry, that postcode isn't valid. Please check it's a proper postcode."
     end
 
-    it "when password doesn't contain a letter" do
-      @bbc_site.bbc_details_page.set_password_value "12345678"
+    it "when postcode is too long" do
+      @bbc_site.bbc_details_page.set_postcode_value "TWTW TWTW"
       @bbc_site.bbc_details_page.submit_form
-      expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password isn't valid. Please include a letter."
-    end
-
-    it "when password only contains letters" do
-      @bbc_site.bbc_details_page.set_password_value "password"
-      @bbc_site.bbc_details_page.submit_form
-      expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password isn't valid. Please include something that isn't a letter."
-    end
-
-    it "when password is easy to guess" do
-      @bbc_site.bbc_details_page.set_password_value "password1"
-      @bbc_site.bbc_details_page.submit_form
-      expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password isn't valid. Make sure it's hard to guess."
+      expect(@bbc_site.bbc_details_page.get_postcode_error_msg).to eq "Sorry, that postcode's too long. Please check it's a proper postcode."
     end
   end
 end

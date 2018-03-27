@@ -8,6 +8,9 @@ class BBC_Details_Page
   PASSWORD_ERROR_MSG = "#form-message-password"
   POSTCODE_VALUE_NAME = "postcode"
   POSTCODE_ERROR_MSG = "#form-message-postcode"
+  GENDER_VALUE = "#gender-input"
+  # GENDER_OPTION_VALUES = ["female","male","other","prefer not to say"]
+  GENDER_ERROR_MSG = "#form-message-gender"
   SUBMIT_BUTTON_ID = "#submit-button"
 
   def find_email
@@ -32,5 +35,13 @@ class BBC_Details_Page
 
   def get_postcode_error_msg
     find(POSTCODE_ERROR_MSG).text
+  end
+
+  def set_gender_value new_gender_index
+    find(GENDER_VALUE).find(:xpath,"option[#{new_gender_index}]").select_option
+  end
+
+  def get_gender_error_msg
+    find(GENDER_ERROR_MSG).text
   end
 end

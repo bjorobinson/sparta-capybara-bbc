@@ -128,22 +128,29 @@ describe "Full Registration Process" do
     #   expect(@bbc_site.bbc_details_page.get_password_error_msg).to eq "Sorry, that password isn't valid. Make sure it's hard to guess."
     # end
 
-    it "when postcode is too short" do
-      @bbc_site.bbc_details_page.set_postcode_value "TW"
-      @bbc_site.bbc_details_page.submit_form
-      expect(@bbc_site.bbc_details_page.get_postcode_error_msg).to eq "Sorry, that postcode's too short. Please check it's a proper postcode."
-    end
+    # it "when postcode is too short" do
+    #   @bbc_site.bbc_details_page.set_postcode_value "TW"
+    #   @bbc_site.bbc_details_page.submit_form
+    #   expect(@bbc_site.bbc_details_page.get_postcode_error_msg).to eq "Sorry, that postcode's too short. Please check it's a proper postcode."
+    # end
+    #
+    # it "when postcode doesn't refer to valid postcode" do
+    #   @bbc_site.bbc_details_page.set_postcode_value "TWTW TTT"
+    #   @bbc_site.bbc_details_page.submit_form
+    #   expect(@bbc_site.bbc_details_page.get_postcode_error_msg).to eq "Sorry, that postcode isn't valid. Please check it's a proper postcode."
+    # end
+    #
+    # it "when postcode is too long" do
+    #   @bbc_site.bbc_details_page.set_postcode_value "TWTW TWTW"
+    #   @bbc_site.bbc_details_page.submit_form
+    #   expect(@bbc_site.bbc_details_page.get_postcode_error_msg).to eq "Sorry, that postcode's too long. Please check it's a proper postcode."
+    # end
 
-    it "when postcode doesn't refer to valid postcode" do
-      @bbc_site.bbc_details_page.set_postcode_value "TWTW TTT"
+    it "when you do not select a gender" do
+      # @bbc_site.bbc_details_page.set_gender_value('0')
+      # sleep 5
       @bbc_site.bbc_details_page.submit_form
-      expect(@bbc_site.bbc_details_page.get_postcode_error_msg).to eq "Sorry, that postcode isn't valid. Please check it's a proper postcode."
-    end
-
-    it "when postcode is too long" do
-      @bbc_site.bbc_details_page.set_postcode_value "TWTW TWTW"
-      @bbc_site.bbc_details_page.submit_form
-      expect(@bbc_site.bbc_details_page.get_postcode_error_msg).to eq "Sorry, that postcode's too long. Please check it's a proper postcode."
+      expect(@bbc_site.bbc_details_page.get_gender_error_msg).to eq "Something's missing. Please check and try again."
     end
   end
 end

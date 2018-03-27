@@ -46,14 +46,18 @@ describe "Incorrect user details produces valid error" do
 end
 
 describe "Full Registration Process" do
-  context "It should correctly and incorrectly go through the registration process" do
-    it "..." do
+  context "It should return the correct errors on invalid inputs throughout the registration process" do
+    it "should return an error on the date of birth page when day given is not a valid input" do
       @bbc_site = BBC_Site.new
       @bbc_site.bbc_homepage.visit_home_page
       @bbc_site.bbc_homepage.click_sign_in_link
       @bbc_site.bbc_login.click_sign_up_link
       @bbc_site.bbc_age_page.select_13_and_over
-      sleep 1
+      @bbc_site.bbc_dob_page.set_day_value "Q"
+      @bbc_site.bbc_dob_page.set_month_value "7"
+      @bbc_site.bbc_dob_page.set_year_value "1996"
+      @bbc_site.bbc_dob_page.select_submit_link
+      expect(@bbc_site.bbc_dob_page.get_dob_error_msg).to eq "Oops, that day doesn't look right. Make sure it's a real date written as DD-MM-YYYY e.g. the 5th of June 2009 is 05-06-2009."
     end
   end
 end

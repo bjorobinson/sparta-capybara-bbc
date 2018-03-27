@@ -21,6 +21,12 @@ class BBC_DOB_Page
     fill_in YEAR_NAME, with: year
   end
 
+  def set_dob_values arr
+    set_day_value arr[0]
+    set_month_value arr[1]
+    set_year_value arr[2]
+  end
+
   def get_dob_error_msg
     find(DOB_ERROR_ID).text
   end
